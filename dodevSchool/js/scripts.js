@@ -3,32 +3,54 @@
 ////////////////////////////////////////////////////////////////////////
 
 class Aluno {
-  
+    Nome
+    Idade
+    Nota
+    constructor(nome,idade,nota) {
+      this.Nome = nome
+      this.Idade = idade
+      this.Nota = nota
+    }
 }
 
 // Array
+let arrayAlunos = []
 
 
 //funções projeto
 
-function CadastrarAluno() {
-  
+function CadastrarAluno(nome, idade, nota, array) {
+  let novoAluno = new Aluno(nome, idade, nota)
+    if(!array.some(x => x.Nome == nome))
+      array.push(novoAluno)
+    return novoAluno;
 }
 
-function OrdenarPorNota() {
- 
-}
-
-function OrdenarPorIdade() {
-
-}
-
-function OrdenarPorNome() {
+function OrdenarPorNota(array) {
+  array.sort((a, b) => a.Nota - b.Nota)
+  return array;
 
 }
 
-function CalcularMedia(){
+function OrdenarPorIdade(array) {
+  array.sort((a, b) => b.Idade - a.Idade)
+  return array;
+}
 
+function OrdenarPorNome(array) {
+  array.sort((a, b) => a.Nome.localeCompare(b.Nome));
+  return array;
+}
+
+function CalcularMedia(array){
+  let somaNotas = 0
+
+  array.forEach((aluno) => {
+    somaNotas += Number(aluno.Nota)
+  })
+
+  const media = somaNotas / array.length;
+  return media;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -169,7 +191,7 @@ const filterAlunos = (filterValue) => {
     default:
       break;
   }
-};
+}
 
 // Eventos
 alunoForm.addEventListener("submit", (e) => {
